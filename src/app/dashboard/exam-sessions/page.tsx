@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { isAuthenticated, getCurrentUser } from '@/lib/api/auth';
 import { 
@@ -14,7 +14,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Button from '@/components/ui/Button';
 
-export default function ExamSessionsPage() {
+function ExamSessionsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const paperId = searchParams.get('paper');
@@ -122,6 +122,18 @@ export default function ExamSessionsPage() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+export default function ExamSessionsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    }>
+      <ExamSessionsContent />
+    </Suspense>
   );
 }
 

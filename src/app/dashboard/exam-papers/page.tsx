@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { isAuthenticated } from '@/lib/api/auth';
 import { getAllExamPapers, createExamPaper, getExamPaperById } from '@/lib/api/exams';
@@ -11,7 +11,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Button from '@/components/ui/Button';
 
-export default function ExamPapersPage() {
+function ExamPapersContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const subjectFilter = searchParams.get('subject');
@@ -214,6 +214,18 @@ export default function ExamPapersPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function ExamPapersPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    }>
+      <ExamPapersContent />
+    </Suspense>
   );
 }
 
