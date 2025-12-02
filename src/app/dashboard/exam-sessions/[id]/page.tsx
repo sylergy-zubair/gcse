@@ -28,14 +28,6 @@ export default function ExamSessionPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (!isAuthenticated()) {
-      router.push('/login');
-      return;
-    }
-    loadSession();
-  }, [router, sessionId]);
-
   const loadSession = async () => {
     try {
       setLoading(true);
@@ -52,6 +44,15 @@ export default function ExamSessionPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      router.push('/login');
+      return;
+    }
+    loadSession();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router, sessionId]);
 
   const handleAnswerChange = (questionId: string, answer: string) => {
     setAnswers({ ...answers, [questionId]: answer });

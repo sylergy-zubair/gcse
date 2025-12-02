@@ -32,14 +32,6 @@ export default function QuestionsPage() {
     exam_paper_id: paperFilter || ''
   });
 
-  useEffect(() => {
-    if (!isAuthenticated()) {
-      router.push('/login');
-      return;
-    }
-    loadData();
-  }, [router, paperFilter]);
-
   const loadData = async () => {
     try {
       setLoading(true);
@@ -55,6 +47,15 @@ export default function QuestionsPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      router.push('/login');
+      return;
+    }
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router, paperFilter]);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();

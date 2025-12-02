@@ -898,7 +898,7 @@ export default function ApiTestPage() {
 
         {results.length === 0 && !isRunning && (
           <div className="text-center py-12 text-gray-500">
-            Click "Run All Tests" to start testing all endpoints
+            Click &quot;Run All Tests&quot; to start testing all endpoints
           </div>
         )}
       </div>
