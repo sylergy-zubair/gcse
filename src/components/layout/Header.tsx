@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { isAuthenticated, logout } from '@/lib/api/auth';
+import Logo from '@/components/ui/Logo';
 
 export default function Header() {
   const pathname = usePathname();
@@ -13,8 +14,8 @@ export default function Header() {
       <nav className="max-w-[1440px] mx-auto px-8 lg:px-24 xl:px-32 2xl:px-[177px] py-[30px]">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="text-primary-500 font-serif font-bold text-2xl">
-            GCSE
+          <Link href="/" className="flex items-center">
+            <Logo size="md" />
           </Link>
 
           {/* Navigation Links */}
